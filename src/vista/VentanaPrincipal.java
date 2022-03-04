@@ -130,28 +130,23 @@ public class VentanaPrincipal extends JFrame implements Acciones{
   }
   
   public void mostrar(String seccion, String[] datos) {
-    String str;
-	switch ((str = seccion).hashCode()) { 
-		case 53318889: if (!str.equals("filechooserdestino")) {
-          break;
-        }
-
-
-        
-/* 143 */         panel.setUbicacionDestino(datos[0]); break;
-      case 1131540166:
-        if (!str.equals("progressbar"))
-          break; 
-/* 147 */         panel.progressBar(datos); break;
-      case 1852356521:
-        if (!str.equals("filechooserorigen"))
-          break;  panel.setUbicacionOrigen(datos[0]); break; }
-		repaint();
+	switch (seccion) { 
+		case "filechooserdestino": 
+			panel.setUbicacionDestino(datos[0]); 
+        break;
+		case "progressbar":
+			panel.progressBar(datos); 
+        break;
+		case "filechooserorigen":
+			panel.setUbicacionOrigen(datos[0]); 
+		break; 
+	}
+	repaint();
   }
 
   
   public void mensaje(String mensaje) {
-	  	if (!mensaje.equals("")) {
+	if (!mensaje.equals("")) {
 		JOptionPane.showMessageDialog(null, mensaje);
     } else {
     	panel.continuar();

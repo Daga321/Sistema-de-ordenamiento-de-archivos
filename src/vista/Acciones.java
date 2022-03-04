@@ -31,9 +31,3 @@ public interface Acciones {
   
   void mensaje(String paramString);
 }
-
-
-/* Location:              C:\Users\Daga\Desktop\SOA\!\vista\Acciones.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */
