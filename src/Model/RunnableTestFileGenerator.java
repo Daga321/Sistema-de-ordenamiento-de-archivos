@@ -1,15 +1,17 @@
-package Execution;
+package Model;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Runner {
+public class RunnableTestFileGenerator implements Runnable{
+	
+	private int totalFilesGenerated;
+	private int limit;
 
 	private int year;
 	private int month;
 	private int day;
 	
-	private final int SIZE = 5000;
 	private File directory;
 	
 	private int extentionIndex;
@@ -17,29 +19,22 @@ public class Runner {
 	
 	private SimpleDateFormat sdfDate;
 	
-	public static void main(String[] args) {
-		
-		new Runner().generateFiles();
-		
-		
+	@Override
+	public void run() {
+		totalFilesGenerated = 0;
+		generateFiles();
 	}
-
+	
 	public void generateFiles() {
 		sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 		
-		directory = new File("./Test Files");
-		if (directory.exists()) {
-			
-			for(int i=0; i<directory.listFiles().length; i++) {
-				System.out.println(directory.listFiles()[i].getName()+" **HA SIDO ELIMINADO**");
-				directory.listFiles()[i].delete();
-			}
-			directory.delete();
+		if (!directory.exists()) {
+			directory.mkdirs();
 		}
-		directory.mkdirs();
+		
 		File newFile;
 		Date newDate;
-		while(directory.listFiles().length<SIZE) {
+		while(directory.listFiles().length<limit) {
 			year = ((int)(Math.random()*(52+1)+70));//(M+1-m)+m
 			//el año 0= 1900 pero no se pueden sobree escribir fecha de modificacion antes de 1970 tons +70 y +52 para la fecha actual
 			month = ((int)(Math.random()*(11+1)));//(M+1-m)+m
@@ -53,6 +48,8 @@ public class Runner {
 				if (!newFile.exists()) {
 					newFile.createNewFile();
 					newFile.setLastModified(newDate.getTime());
+					totalFilesGenerated++;
+//					Thread.sleep(250);
 		        }
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -60,4 +57,33 @@ public class Runner {
 			
 		}
 	}
+	
+	public String[] getProgress() {
+		String[] datos = {
+				""+totalFilesGenerated, ""+limit
+	    };
+		return datos;
+	}
+	
+	public int getTotalFilesGenerated() {
+		return totalFilesGenerated;
+	}
+
+	public void setTotalFilesGenerated(int totalFilesGenerated) {
+		this.totalFilesGenerated = totalFilesGenerated;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public void setDirectory(String path) {
+		this.directory = new File(path+"/Test Files");
+	}
+
+	
 }
