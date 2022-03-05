@@ -1,5 +1,5 @@
-/control/
-/ejecucion/
-/firma.png
-/modelo/
-/vista/
+/Runner.class
+/Execution/
+/Model/
+/View/
+/Controller/
