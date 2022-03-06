@@ -13,7 +13,7 @@ public class RunnableOrganizer implements Runnable{
 	
 	private Management management;
 	
-	private File file;
+	private File originDirectory;
 	private SimpleDateFormat sdfMonth;
 	private SimpleDateFormat sdfYear;
 	private String mes;
@@ -47,26 +47,47 @@ public class RunnableOrganizer implements Runnable{
 		this.max = max;
 	}
 
+	private File[] files(File carpeta) {
+		return carpeta.listFiles();
+	}
+
+	private File[] filterFiles(File carpeta, final String extencion) {
+		FileFilter filtro = new FileFilter(){
+			public boolean accept(File archivo){
+	    	  	if (archivo.isDirectory() || archivo.getName().contains(extencion)) {
+	    	  		return true;
+	    	  	}
+		  		return false;
+	  		}
+		};
+		return carpeta.listFiles(filtro);
+	}
+	
 	public void organize() {
 		
+		originDirectory = new File(data[0]);
+		  
+		File[] files = null;
+		if (data[6].equals("false")) {
+			files = files(originDirectory);
+		} else {
+			files = filterFiles(originDirectory, data[7]);
+		} 
 //		System.out.println(files.length+"<-F");
 		
-		file = management.getFile(data);
-		
-		if (file != null) {
-			while(!management.getOrganize()) {}//esperando luz verde para iniciar
+		if (files.length != 0) {
 			for (int i = min; i < max; i++) {
 //				System.out.println("==>"+file.getName()+"<==");
 				try {
-					if (file.isDirectory()) {
+					if (files[i].isDirectory()) {
 						String[] info = {
-								file.toPath().toString(), data[1], data[2], data[3], data[4], data[5], data[6], data[7]
+								files[i].toPath().toString(), data[1], data[2], data[3], data[4], data[5], data[6], data[7]
 						};
 						management.totalFilesSubtract(1);
 //						Thread.sleep(150);
 						management.organizeSort(info);
 					} else {
-						attributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class, new java.nio.file.LinkOption[0]);
+						attributes = Files.readAttributes(files[i].toPath(), BasicFileAttributes.class, new java.nio.file.LinkOption[0]);
 						creationDate = attributes.creationTime();
 						modificationDate = attributes.lastModifiedTime();
 //						System.out.println(file.getName()+"  Fecha creacion::" + creationDate+"  Fecha modificacion::" + modificationDate);
@@ -98,12 +119,12 @@ public class RunnableOrganizer implements Runnable{
 						if (!directory.exists()) {
 							directory.mkdirs();
 						}
-						directory = new File(directory.toPath() + "/" + file.getName());
+						directory = new File(directory.toPath() + "/" + files[i].getName());
 						if(directory.exists()) {
 							//el archivo ya fue transferido desde otra carpeta a la actual siendo esta su destino por ende no amerita ser contada como parte del total de archivos existentes ps desde la carpeta anterior conto
 							management.totalFilesSubtract(1);
 						}else {
-							file.renameTo(directory);
+							files[i].renameTo(directory);
 							management.processedFilesAdd(1);
 						}
 						

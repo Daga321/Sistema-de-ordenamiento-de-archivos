@@ -1,9 +1,7 @@
 package Model;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Management {
 
@@ -17,8 +15,6 @@ public class Management {
 	private long start;
 	private long end;
 	
-	private boolean organize;
-	
 	private final int BLOCK = 500; 
 	
 	public Management() {
@@ -28,7 +24,6 @@ public class Management {
 	
 	public void organize(String[] data) {
 		threadsList = new ArrayList<>();
-		organize = false;
 		time = 0;
 		totalFiles = 0;
 		processedFiles = 0;
@@ -67,54 +62,10 @@ public class Management {
 			}
 			
 			threadOrganizer.start();
-			
 			//no doy star aqui ps varios hilos se adelantan y empiezan a mover archivos lo cual deberia de ser bueno pero NO
 			//resulta que en data envio es una direccion y cada hilo crea su propia instancia de este archivo por lo que los 
 			//ultimos hilos tienen una instancia con menos archivos que las otras pero aun asi deben de procesar el bloque compreto
-			
 		}
-		organize = true;
-	}
-	
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-	private File[] files(File carpeta) {
-		return carpeta.listFiles();
-	}
-
-	private File[] filterFiles(File carpeta, final String extencion) {
-		FileFilter filtro = new FileFilter(){
-			public boolean accept(File archivo){
-	    	  	if (archivo.isDirectory() || archivo.getName().contains(extencion)) {
-	    	  		return true;
-	    	  	}
-		  		return false;
-	  		}
-		};
-		return carpeta.listFiles(filtro);
-	}
-	
-	public synchronized File getFile(String[] data) {
-		
-		File originDirectory = new File(data[0]);
-		  
-		File[] files = null;
-		if (data[6].equals("false")) {
-			files = files(originDirectory);
-		} else {
-			files = filterFiles(originDirectory, data[7]);
-		} 
- 
-		if(files.length!=0) {
-			return files[files.length-1];
-		}else {
-			return null;
-		}
-	}
-	
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	public boolean getOrganize() {
-		return organize;
 	}
 	
 	public void totalFilesSubtract(int value) {
