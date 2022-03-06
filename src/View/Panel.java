@@ -187,7 +187,7 @@ public class Panel extends JPanel{
 	public void progressBar(String[] data) {
 		int min = Integer.parseInt(data[0]);
 		int max = Integer.parseInt(data[1]);
-		System.out.println(String.valueOf(min) + " de " + max + " elementos procesados");
+//		System.out.println(String.valueOf(min) + " de " + max + " elementos procesados");
 		txtComment.setText("<html><body>" + min + " de " + max + " elementos procesados</body></html>");
 		pbProgress.setValue(min);
 		pbProgress.setMaximum(max);

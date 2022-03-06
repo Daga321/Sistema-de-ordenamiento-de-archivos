@@ -23,9 +23,10 @@ public class RunnableProgressBar implements Runnable{
     	  } 
       } 
 	} catch (InterruptedException interruptedException) {
-      return;
+		interruptedException.printStackTrace();
     } 
-  } public void activate() {
+  } 
+  public void activate() {
 	  status = true;
   }
   
