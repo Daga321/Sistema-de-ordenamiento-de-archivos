@@ -26,12 +26,8 @@ import View.Actions;
 				} else {
 					actions.activate(Actions.CHECKBOXOPTIONS);
 				} 
-				if (actions.capture(Actions.CHECKBOXADVANCEDOPTIONS)[1].equals("true")) {
-					actions.activate(Actions.CHECKBOXADVANCEDOPTIONS);
-				}
 				actions.message("");
 			break;
-	 
 			case Actions.CONTINUE:
 				actions.desactivate(Actions.PROGRESSBAR); 
 	    	   	management.organize(actions.capture(Actions.CONTINUE));
