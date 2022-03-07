@@ -26,9 +26,6 @@ import View.Actions;
 				} else {
 					actions.activate(Actions.CHECKBOXOPTIONS);
 				} 
-				if (actions.capture(Actions.CHECKBOXADVANCEDOPTIONS)[1].equals("true")) {
-					actions.activate(Actions.CHECKBOXADVANCEDOPTIONS);
-				}
 				actions.message("");
 			break;
 	 
