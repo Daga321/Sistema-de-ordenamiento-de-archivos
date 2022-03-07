@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 
 public class Management {
@@ -33,39 +34,62 @@ public class Management {
 
 	public void organizeSort(String[] data) {
 		File directory = new File(data[0]);
-		int threads = ((directory.listFiles().length)/BLOCK);
-		if(((directory.listFiles().length)%BLOCK)!=0) {
+		File[] files;
+		
+		if (data[6].equals("false")) {
+			files = directory.listFiles();
+		} else {
+			files = filterFiles(directory, data[7]);
+		} 
+		int threads = ((files.length)/BLOCK);
+		if(((files.length)%BLOCK)!=0) {
 			threads++;
 		}
-		System.out.println(directory.getPath()+"-->"+directory.listFiles().length+"-->"+threads);
+		System.out.println(directory.getPath()+"-->"+files.length+"-->"+threads);
 		for(int i = 0; i< threads; i++) {
 			
 			runnableOrganizer = new RunnableOrganizer(this);
 			threadOrganizer = new Thread(runnableOrganizer);
 			threadsList.add(threadOrganizer);
-//			System.out.println("I::"+i+"-----"+((directory.listFiles().length)/BLOCK));
-			if(i==((directory.listFiles().length)/BLOCK)) {
-				totalFiles+=((directory.listFiles().length)%BLOCK);
+//			System.out.println("I::"+i+"-----"+((files.length)/BLOCK));
+			if(i==((files.length)/BLOCK)) {
+				totalFiles+=((files.length)%BLOCK);
 				System.out.println("Bloque final");
-				System.out.println("MIN::"+(BLOCK*i)+"   MAX::"+directory.listFiles().length);
-				runnableOrganizer.setData(data, (BLOCK*i), directory.listFiles().length);//[2500 a 2580) 
+				System.out.println("MIN::"+(BLOCK*i)+"   MAX::"+files.length);
+				runnableOrganizer.setData(files, data, (BLOCK*i), files.length);//[2500 a 2580) 
 				//en este caso el bloque no se encuentra completo por lo que el tope maximo es la cantidad maxima de archivos
 				//este bloque sera siempre el ultimo en generarse 
-				//este bloque se generara si ((directory.listFiles().length)%BLOCK) != 0 es decir la cantidad de bloques no es exacto
+				//este bloque se generara si ((files.length)%BLOCK) != 0 es decir la cantidad de bloques no es exacto
 			}else {
 				totalFiles+=BLOCK;
 				System.out.println("Bloque");
 				System.out.println("MIN::"+(BLOCK*i)+"   MAX::"+(BLOCK*(i+1)));
-				runnableOrganizer.setData(data, (BLOCK*i), (BLOCK*(i+1)));//[0 a 500) desde cero hasta 499
-				//no se agrega -1 dado que el for va asta (i<500)=499
+				runnableOrganizer.setData(files, data, (BLOCK*i), (BLOCK*(i+1)));//[0 a 500) desde cero hasta 499
+				//no se agrega -1 dado que el for va hasta (i<500)=499
 				//este bloque sera cualqueira menos el ultimo
 			}
 			
-			threadOrganizer.start();
+			try {
+				threadOrganizer.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			//no doy star aqui ps varios hilos se adelantan y empiezan a mover archivos lo cual deberia de ser bueno pero NO
 			//resulta que en data envio es una direccion y cada hilo crea su propia instancia de este archivo por lo que los 
 			//ultimos hilos tienen una instancia con menos archivos que las otras pero aun asi deben de procesar el bloque compreto
 		}
+	}
+
+	private File[] filterFiles(File carpeta, final String extencion) {
+		FileFilter filtro = new FileFilter(){
+			public boolean accept(File archivo){
+	    	  	if (archivo.isDirectory() || archivo.getName().contains(extencion)) {
+	    	  		return true;
+	    	  	}
+		  		return false;
+	  		}
+		};
+		return carpeta.listFiles(filtro);
 	}
 	
 	public void totalFilesSubtract(int value) {

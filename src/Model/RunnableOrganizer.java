@@ -13,7 +13,7 @@ public class RunnableOrganizer implements Runnable{
 	
 	private Management management;
 	
-	private File originDirectory;
+	private File[] files;
 	private SimpleDateFormat sdfMonth;
 	private SimpleDateFormat sdfYear;
 	private String mes;
@@ -41,39 +41,16 @@ public class RunnableOrganizer implements Runnable{
 		} catch (Exception e) {}
 	}
 
-	public void setData(String[] data, int min, int max) {
+	public void setData(File[] files, String[] data, int min, int max) {
+		this.files = files;
 		this.data = data;
 		this.min = min;
 		this.max = max;
 	}
 
-	private File[] files(File carpeta) {
-		return carpeta.listFiles();
-	}
-
-	private File[] filterFiles(File carpeta, final String extencion) {
-		FileFilter filtro = new FileFilter(){
-			public boolean accept(File archivo){
-	    	  	if (archivo.isDirectory() || archivo.getName().contains(extencion)) {
-	    	  		return true;
-	    	  	}
-		  		return false;
-	  		}
-		};
-		return carpeta.listFiles(filtro);
-	}
-	
 	public void organize() {
 		
-		originDirectory = new File(data[0]);
-		  
-		File[] files = null;
-		if (data[6].equals("false")) {
-			files = files(originDirectory);
-		} else {
-			files = filterFiles(originDirectory, data[7]);
-		} 
-//		System.out.println(files.length+"<-F");
+		System.out.println(files.length+"<-F");
 		
 		if (files.length != 0) {
 			for (int i = min; i < max; i++) {
