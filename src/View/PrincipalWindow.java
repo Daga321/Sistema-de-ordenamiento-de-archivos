@@ -20,7 +20,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 	ImageIcon icono;
   
 	public PrincipalWindow() {
-	super("SOA TEST");
+	super("sistema de ordenamiento de archivos TEST - Un hilo");
 	setLayout((LayoutManager)null);
 	setDefaultCloseOperation(3);
 	setSize(600, 310);
@@ -40,7 +40,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 	fileChooserPanel = new FileChooserPanel();
 	    
 	try {
-		url = PrincipalWindow.class.getResource("/archivador.png");
+		url = PrincipalWindow.class.getResource("/icono.png");
 		      
 		icono = new ImageIcon(url);
 		setIconImage(icono.getImage());

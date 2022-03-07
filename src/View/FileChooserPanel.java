@@ -5,29 +5,29 @@
  import javax.swing.JPanel;
  
  public class FileChooserPanel extends JPanel {
-   private JFileChooser fcUbicacion;
+   private JFileChooser fcPath;
    
    public FileChooserPanel() {
-     inicializar();
-     agregar();
+     initialize();
+     assign();
    }
    
-   private void inicializar() {
-     fcUbicacion = new JFileChooser();
-     fcUbicacion.setBounds(80, 15, 1000, 700);
-     fcUbicacion.setMultiSelectionEnabled(false);
-     fcUbicacion.setFileSelectionMode(1);
+   private void initialize() {
+     fcPath = new JFileChooser();
+     fcPath.setBounds(80, 15, 1000, 700);
+     fcPath.setMultiSelectionEnabled(false);
+     fcPath.setFileSelectionMode(1);
    }
    
-   private void agregar() {
-     add(fcUbicacion);
+   private void assign() {
+     add(fcPath);
    }
    
-   public int mostrar(JFrame frame) {
-     return fcUbicacion.showOpenDialog(frame);
+   public int show(JFrame frame) {
+     return fcPath.showOpenDialog(frame);
    }
    
-   public String obtenerRuta() {
-     return fcUbicacion.getSelectedFile().getAbsolutePath();
+   public String getPath() {
+     return fcPath.getSelectedFile().getAbsolutePath();
    }
 }

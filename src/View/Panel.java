@@ -21,109 +21,109 @@ import Control.Controller;
 
 
 public class Panel extends JPanel{
-	private JLabel txtInformacionUbicacion;
-	private RoundJTextField tfUbicacion;
-	private JButton btnExaminarUbicacion;
-	private JLabel txtInformacionCantidad;
+
+	private JLabel txtPathInformation;
+	private RoundJTextField tfPath;
+	private JButton btnSearchPath;
+	private JLabel txtAmountInformation;
 	private SpinnerNumberModel smModel;
-	private JSpinner sCantidad;
-	private JButton btnContinuar;
-	private JLabel txtComentario;
-	private JProgressBar pbProgreso;
+	private JSpinner sAmount;
+	private JButton btnContinue;
+	private JLabel txtComment;
+	private JProgressBar pbProgress;
 	
 	public Panel() {
 		setLayout((LayoutManager)null);
 		setBackground(Color.WHITE);
-		inicializar();
-		agregar();
+		initialize();
+		assign();
 	}
 	
-	private void inicializar() {
-		txtInformacionUbicacion = new JLabel("<html><body>Por favor selecciona la ubicacion donde desea generar los archivos de prueba</body></html>");
-		txtInformacionUbicacion.setBounds(80, 20, 424, 30);
+	private void initialize() {
+		txtPathInformation = new JLabel("<html><body>Por favor selecciona la ubicacion donde desea generar los archivos de prueba</body></html>");
+		txtPathInformation.setBounds(80, 20, 424, 30);
 		
-		
-		tfUbicacion = new RoundJTextField(20);
-		tfUbicacion.setBounds(80, 60, 325, 25);
+		tfPath = new RoundJTextField(20);
+		tfPath.setBounds(80, 60, 380, 25);
 		ImageIcon imgIcontxt = new ImageIcon("Imagenes/comp.png");
-	    Image imgEscaladatxt = imgIcontxt.getImage().getScaledInstance(tfUbicacion.getWidth(),tfUbicacion.getHeight(), Image.SCALE_SMOOTH);
+	    Image imgEscaladatxt = imgIcontxt.getImage().getScaledInstance(tfPath.getWidth(),tfPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladotxt = new ImageIcon(imgEscaladatxt);
-	    tfUbicacion.setIcon(iconoEscaladotxt);
-		tfUbicacion.setEditable(false);
-		tfUbicacion.setBorder(new RoundedBorder(20));
-		tfUbicacion.setForeground(Color.BLUE);
-		tfUbicacion.setBackground(Color.WHITE);
-		tfUbicacion.setBorder(new LineBorder(Color.BLACK));
+	    tfPath.setIcon(iconoEscaladotxt);
+		tfPath.setEditable(false);
+		tfPath.setBorder(new RoundedBorder(20));
+		tfPath.setForeground(Color.BLUE);
+		tfPath.setBackground(Color.WHITE);
+		tfPath.setBorder(new LineBorder(Color.BLACK));
 		
-		btnExaminarUbicacion = new JButton();
-		btnExaminarUbicacion.setBounds(414, 60, 25, 25);
-		btnExaminarUbicacion.setContentAreaFilled(false);
-		btnExaminarUbicacion.setBorder(new RoundedBorder(20));
+		btnSearchPath = new JButton();
+		btnSearchPath.setBounds(470, 60, 25, 25);
+		btnSearchPath.setContentAreaFilled(false);
+		btnSearchPath.setBorder(new RoundedBorder(20));
 		ImageIcon imgIconBoton = new ImageIcon("Imagenes/fileCabinet.png");
-	    Image imgEscaladaBoton = imgIconBoton.getImage().getScaledInstance(btnExaminarUbicacion.getWidth(),btnExaminarUbicacion.getHeight(), Image.SCALE_SMOOTH);
+	    Image imgEscaladaBoton = imgIconBoton.getImage().getScaledInstance(btnSearchPath.getWidth(),btnSearchPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladoBoton = new ImageIcon(imgEscaladaBoton);
-	    btnExaminarUbicacion.setIcon(iconoEscaladoBoton);
-	    btnExaminarUbicacion.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    btnSearchPath.setIcon(iconoEscaladoBoton);
+	    btnSearchPath.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		txtInformacionCantidad = new JLabel("<html><body>Por favor selecciona la cantidad de archivos de prueba a generar</body></html>");
-		txtInformacionCantidad.setBounds(80, 90, 424, 30);
+		txtAmountInformation = new JLabel("<html><body>Por favor selecciona la cantidad de archivos de prueba a generar</body></html>");
+		txtAmountInformation.setBounds(80, 90, 424, 30);
 		
 		smModel = new SpinnerNumberModel(5000, 5000, 15000, 50);
-		sCantidad = new JSpinner(smModel);
-		sCantidad.setBounds(80,130,90,25);
+		sAmount = new JSpinner(smModel);
+		sAmount.setBounds(80,130,90,25);
 		
-		btnContinuar = new JButton("Continuar");
-		btnContinuar.setBounds(247, 165, 100, 25);
-		btnContinuar.setBorder(new RoundedBorder(20));
-		btnContinuar.setContentAreaFilled(false);
-		btnContinuar.setEnabled(false);
-		btnContinuar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnContinue = new JButton("Continuar");
+		btnContinue.setBounds(247, 165, 100, 25);
+		btnContinue.setBorder(new RoundedBorder(20));
+		btnContinue.setContentAreaFilled(false);
+		btnContinue.setEnabled(false);
+		btnContinue.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		txtComentario = new JLabel("<html><body>0 de ... archivos de testeo generados</body></html>");
-		txtComentario.setBounds(80, 190, 424, 20);
+		txtComment = new JLabel("<html><body>0 de ... archivos de testeo generados</body></html>");
+		txtComment.setBounds(80, 190, 424, 20);
 		
-		pbProgreso = new JProgressBar(0, 0);
-		pbProgreso.setBounds(80, 220, 424, 30);
-		pbProgreso.setBackground(Color.WHITE);
+		pbProgress = new JProgressBar(0, 0);
+		pbProgress.setBounds(80, 220, 424, 30);
+		pbProgress.setBackground(Color.WHITE);
 	}
 
 	
-	private void agregar() {
-		add(txtInformacionUbicacion);
-		add(tfUbicacion);
-		add(btnExaminarUbicacion);
-		add(txtInformacionCantidad);
-		add(sCantidad);
-		add(btnContinuar);
-		add(txtComentario);
-		add(pbProgreso);
+	private void assign() {
+		add(txtPathInformation);
+		add(tfPath);
+		add(btnSearchPath);
+		add(txtAmountInformation);
+		add(sAmount);
+		add(btnContinue);
+		add(txtComment);
+		add(pbProgress);
 	}
 	
 	public void asignarControl(Controller control) {
-		btnExaminarUbicacion.setActionCommand("filechooser");
-		btnExaminarUbicacion.addActionListener((ActionListener)control);
+		btnSearchPath.setActionCommand(Actions.ORIGINFILECHOOSER);
+		btnSearchPath.addActionListener((ActionListener)control);
 		
-		btnContinuar.setActionCommand("continuar");
-		btnContinuar.addActionListener((ActionListener)control);
+		btnContinue.setActionCommand(Actions.CONTINUE);
+		btnContinue.addActionListener((ActionListener)control);
 		
 	}
 	
-	public void setUbicacionOrigen(String ubicacion) {
-		tfUbicacion.setText(ubicacion);
+	public void setOriginPath(String ubicacion) {
+		tfPath.setText(ubicacion);
 	}
 	
-	public void continuar() {
-		if (tfUbicacion.getText().length() > 0 ) {
-			btnContinuar.setEnabled(true);
+	public void continueTo() {
+		if (tfPath.getText().length() > 0 ) {
+			btnContinue.setEnabled(true);
 		} else {
-			btnContinuar.setEnabled(false);
+			btnContinue.setEnabled(false);
 		} 
 	}
 
 	
-	public String[] capturar() {
-		String ubicacion = tfUbicacion.getText();
-		String limite = ""+sCantidad.getValue();
+	public String[] capture() {
+		String ubicacion = tfPath.getText();
+		String limite = ""+sAmount.getValue();
 		String[] datos = {
 				ubicacion, limite
 		};
@@ -133,26 +133,26 @@ public class Panel extends JPanel{
 	public void progressBar(String[] datos) {
 		int min = Integer.parseInt(datos[0]);
 		int max = Integer.parseInt(datos[1]);
-		System.out.println(String.valueOf(min) + " de " + max + " archivos de testeo generados");
-		txtComentario.setText("<html><body>" + min + " de " + max + " archivos de testeo generados</body></html>");
-		pbProgreso.setValue(min);
-		pbProgreso.setMaximum(max);
+//		System.out.println(String.valueOf(min) + " de " + max + " archivos de testeo generados");
+		txtComment.setText("<html><body>" + min + " de " + max + " archivos de testeo generados</body></html>");
+		pbProgress.setValue(min);
+		pbProgress.setMaximum(max);
 	}
 	
-	public void activar() {
-		tfUbicacion.setEnabled(true);
-		sCantidad.setEnabled(true);
-		btnExaminarUbicacion.setEnabled(true);
-		btnContinuar.setEnabled(true);
+	public void activate() {
+		tfPath.setEnabled(true);
+		sAmount.setEnabled(true);
+		btnSearchPath.setEnabled(true);
+		btnContinue.setEnabled(true);
 	}
 	
-	public void desactivar() {
-		txtComentario.setText("0 de ... archivos de testeo generados");
-		pbProgreso.setValue(0);
-		tfUbicacion.setEnabled(false);
-		sCantidad.setEnabled(false);
-		btnExaminarUbicacion.setEnabled(false);
-		btnContinuar.setEnabled(false);
+	public void desactivate() {
+		txtComment.setText("0 de ... archivos de testeo generados");
+		pbProgress.setValue(0);
+		tfPath.setEnabled(false);
+		sAmount.setEnabled(false);
+		btnSearchPath.setEnabled(false);
+		btnContinue.setEnabled(false);
 	}
 	
 }
