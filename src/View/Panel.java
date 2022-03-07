@@ -1,7 +1,13 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,13 +15,14 @@ import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.LineBorder;
 
 import Control.Controller;
 
 
 public class Panel extends JPanel{
 	private JLabel txtInformacionUbicacion;
-	private JTextField tfUbicacion;
+	private RoundJTextField tfUbicacion;
 	private JButton btnExaminarUbicacion;
 	private JLabel txtInformacionCantidad;
 	private SpinnerNumberModel smModel;
@@ -26,6 +33,7 @@ public class Panel extends JPanel{
 	
 	public Panel() {
 		setLayout((LayoutManager)null);
+		setBackground(Color.WHITE);
 		inicializar();
 		agregar();
 	}
@@ -34,12 +42,28 @@ public class Panel extends JPanel{
 		txtInformacionUbicacion = new JLabel("<html><body>Por favor selecciona la ubicacion donde desea generar los archivos de prueba</body></html>");
 		txtInformacionUbicacion.setBounds(80, 20, 424, 30);
 		
-		tfUbicacion = new JTextField();
-		tfUbicacion.setBounds(80, 60, 314, 25);
-		tfUbicacion.setEditable(false);
 		
-		btnExaminarUbicacion = new JButton("Examinar");
-		btnExaminarUbicacion.setBounds(414, 60, 90, 25);
+		tfUbicacion = new RoundJTextField(20);
+		tfUbicacion.setBounds(80, 60, 325, 25);
+		ImageIcon imgIcontxt = new ImageIcon("Imagenes/comp.png");
+	    Image imgEscaladatxt = imgIcontxt.getImage().getScaledInstance(tfUbicacion.getWidth(),tfUbicacion.getHeight(), Image.SCALE_SMOOTH);
+	    Icon iconoEscaladotxt = new ImageIcon(imgEscaladatxt);
+	    tfUbicacion.setIcon(iconoEscaladotxt);
+		tfUbicacion.setEditable(false);
+		tfUbicacion.setBorder(new RoundedBorder(20));
+		tfUbicacion.setForeground(Color.BLUE);
+		tfUbicacion.setBackground(Color.WHITE);
+		tfUbicacion.setBorder(new LineBorder(Color.BLACK));
+		
+		btnExaminarUbicacion = new JButton();
+		btnExaminarUbicacion.setBounds(414, 60, 25, 25);
+		btnExaminarUbicacion.setContentAreaFilled(false);
+		btnExaminarUbicacion.setBorder(new RoundedBorder(20));
+		ImageIcon imgIconBoton = new ImageIcon("Imagenes/fileCabinet.png");
+	    Image imgEscaladaBoton = imgIconBoton.getImage().getScaledInstance(btnExaminarUbicacion.getWidth(),btnExaminarUbicacion.getHeight(), Image.SCALE_SMOOTH);
+	    Icon iconoEscaladoBoton = new ImageIcon(imgEscaladaBoton);
+	    btnExaminarUbicacion.setIcon(iconoEscaladoBoton);
+	    btnExaminarUbicacion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		txtInformacionCantidad = new JLabel("<html><body>Por favor selecciona la cantidad de archivos de prueba a generar</body></html>");
 		txtInformacionCantidad.setBounds(80, 90, 424, 30);
@@ -49,14 +73,18 @@ public class Panel extends JPanel{
 		sCantidad.setBounds(80,130,90,25);
 		
 		btnContinuar = new JButton("Continuar");
-		btnContinuar.setBounds(247, 165, 90, 25);
+		btnContinuar.setBounds(247, 165, 100, 25);
+		btnContinuar.setBorder(new RoundedBorder(20));
+		btnContinuar.setContentAreaFilled(false);
 		btnContinuar.setEnabled(false);
+		btnContinuar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		txtComentario = new JLabel("<html><body>0 de ... archivos de testeo generados</body></html>");
 		txtComentario.setBounds(80, 190, 424, 20);
 		
 		pbProgreso = new JProgressBar(0, 0);
 		pbProgreso.setBounds(80, 220, 424, 30);
+		pbProgreso.setBackground(Color.WHITE);
 	}
 
 	
