@@ -284,7 +284,7 @@ public class Panel extends JPanel{
 			txtComment.setLocation(94, txtComment.getY()-85);
 			pbProgress.setLocation(92, pbProgress.getY()-85);
 		}else {
-			cbAdvancedOptions.setLocation(92, 171);
+			cbAdvancedOptions.setLocation(92, 171); 
 			btnContinue.setLocation(251, 220);
 			txtComment.setLocation(92, 277);
 			pbProgress.setLocation(92, 317);
@@ -294,10 +294,10 @@ public class Panel extends JPanel{
 	public void activateAdvancedOptions() {
 		add(advancedOptionsPanel);
 		if (getCbOpciones()[0].equals("false")) {
-			advancedOptionsPanel.setLocation(84, 305);
-			btnContinue.setLocation(245, btnContinue.getY()+390);
-			txtComment.setLocation(94, txtComment.getY()+378);
-			pbProgress.setLocation(92, pbProgress.getY()+363);
+			advancedOptionsPanel.setLocation(84, 295);
+			btnContinue.setLocation(245, btnContinue.getY()+380);
+			txtComment.setLocation(94, txtComment.getY()+368);
+			pbProgress.setLocation(92, pbProgress.getY()+353);
 		}else {
 			advancedOptionsPanel.setLocation(84, 205);
 			btnContinue.setLocation(245, btnContinue.getY()+366);
@@ -309,9 +309,9 @@ public class Panel extends JPanel{
 	public void desactivateAdvancedOptions() {
 		remove(advancedOptionsPanel);
 		if (getCbOpciones()[0].equals("false")) {
-			btnContinue.setLocation(245, btnContinue.getY()-390);
-			txtComment.setLocation(94, txtComment.getY()-378);
-			pbProgress.setLocation(92, pbProgress.getY()-363);
+			btnContinue.setLocation(245, btnContinue.getY()-380);
+			txtComment.setLocation(94, txtComment.getY()-368);
+			pbProgress.setLocation(92, pbProgress.getY()-353);
 		}else {
 			cbAdvancedOptions.setLocation(92, 171);
 			btnContinue.setLocation(251, 220);
