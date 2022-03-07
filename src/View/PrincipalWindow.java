@@ -20,17 +20,17 @@ public class PrincipalWindow extends JFrame implements Actions{
 	ImageIcon icono;
   
 	public PrincipalWindow() {
-	super("sistema de ordenamiento de archivos");
+	super("SOA TEST");
 	setLayout((LayoutManager)null);
 	setDefaultCloseOperation(3);
 	setSize(600, 310);
 	setLocationRelativeTo((Component)null);
 	setResizable(false);
-	inicializar();
-	agregar();
+	initialize();
+	assign();
   }
   
-  private void inicializar() {
+  private void initialize() {
 	panel = new Panel();
 	panel.setBounds(0, 0, 584, 280);
 	    
@@ -47,7 +47,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 	} catch (Exception exception) {}
   }
   
-  private void agregar() {
+  private void assign() {
 	add(panel);
   }
   
@@ -58,23 +58,23 @@ public class PrincipalWindow extends JFrame implements Actions{
   }
 
   
-  public void activar(String seccion) {
-	if (seccion.equals("progressbar")) {
-		panel.activar();
-		runnableProgressBar.finalizar();
+  public void activate(String section) {
+	if (section.equals(Actions.PROGRESSBAR)) {
+		panel.activate();
+		runnableProgressBar.desactivate();
 	} 
 	setLocationRelativeTo(null);
 	repaint();
   }
 
   
-  public void desactivar(String seccion) {
-	  if (seccion.equals("progressbar")) {
-		panel.desactivar();
+  public void desactivate(String section) {
+	  if (section.equals(Actions.PROGRESSBAR)) {
+		panel.desactivate();
 		try {
 			threadProgressBar.start();
 		} catch (Exception e) {
-			runnableProgressBar.iniciar();
+			runnableProgressBar.activate();
       } 
     } 
 	setLocationRelativeTo((Component)null);
@@ -83,42 +83,42 @@ public class PrincipalWindow extends JFrame implements Actions{
 
 
   
-  public String[] capturar(String seccion) {
-	if (seccion.equals("filechooser") ) {
-		String[] datos = {
-		""+fileChooserPanel.mostrar(this)
+  public String[] capture(String section) {
+	if (section.equals(Actions.ORIGINFILECHOOSER) ) {
+		String[] data = {
+		""+fileChooserPanel.show(this)
 		};
-		return datos;
-	}else if (seccion.equals("ubicacion")) {
-		String[] datos = {
-				fileChooserPanel.obtenerRuta()
+		return data;
+	}else if (section.equals(Actions.PATH)) {
+		String[] data = {
+				fileChooserPanel.getPath()
 		};
-		return datos;
-	}else  if (seccion.equals("continuar")) {
-		return panel.capturar(); 
+		return data;
+	}else  if (section.equals(Actions.CONTINUE)) {
+		return panel.capture(); 
 	}
 		return null;
   }
   
-  public void mostrar(String seccion, String[] datos) {
-	switch (seccion) { 
-		case "progressbar":
-			panel.progressBar(datos); 
+  public void show(String section, String[] data) {
+	switch (section) { 
+		case Actions.PROGRESSBAR:
+			panel.progressBar(data); 
         break;
         
-		case "filechooser":
-			panel.setUbicacionOrigen(datos[0]); 
+		case Actions.ORIGINFILECHOOSER:
+			panel.setOriginPath(data[0]); 
 		break; 
 	}
 	repaint();
   }
 
   
-  public void mensaje(String mensaje) {
-	if (!mensaje.equals("")) {
-		JOptionPane.showMessageDialog(null, mensaje);
+  public void message(String message) {
+	if (!message.equals("")) {
+		JOptionPane.showMessageDialog(null, message);
     } else {
-    	panel.continuar();
+    	panel.continueTo();
     } 
   }
 }

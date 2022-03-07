@@ -1,19 +1,22 @@
 package View;
 
 public interface Actions {
-  public static final String CONTINUAR = "continuar";
+	
+	public static final String CONTINUE = "continue";
   
-  public static final String FILECHOOSERORIGEN = "filechooser";
+	public static final String ORIGINFILECHOOSER = "originFileChooser";
+	
+	public static final String PATH = "path";
   
-  public static final String PROGRESSBAR = "progressbar";
+	public static final String PROGRESSBAR = "progressbar";
   
-  void activar(String paramString);
+	void activate(String paramString);
   
-  void desactivar(String paramString);
+	void desactivate(String paramString);
   
-  String[] capturar(String paramString);
+	String[] capture(String paramString);
   
-  void mostrar(String paramString, String[] paramArrayOfString);
+	void show(String paramString, String[] paramArrayOfString);
   
-  void mensaje(String paramString);
+	void message(String paramString);
 }

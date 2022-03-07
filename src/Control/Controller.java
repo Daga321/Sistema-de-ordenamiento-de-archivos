@@ -12,32 +12,32 @@ import View.Actions;
  
  
  public class Controller implements ActionListener, MouseListener {
-   Actions acciones;
-   Management gestion;
+   Actions actions;
+   Management management;
    
-   public Controller(Actions acciones) {
-	   this.acciones = acciones;
-		gestion = new Management();
+   public Controller(Actions actions) {
+	   this.actions = actions;
+		management = new Management();
    }
    
    public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()){ 
 	 
-			case "continuar":
-	    	   	gestion.generateFiles(acciones.capturar("continuar"));
-	         	acciones.desactivar("progressbar"); 
+			case Actions.CONTINUE:
+	    	   	management.generateFiles(actions.capture(Actions.CONTINUE));
+	         	actions.desactivate(Actions.PROGRESSBAR); 
 	        break;
-		   
-	       case "filechooser":
-	    	   if (acciones.capturar("filechooser")[0].equals("0")) { 
-	    		   acciones.mostrar("filechooser", acciones.capturar("ubicacion")); 
-	    		   acciones.mensaje(""); 
+		    
+			case Actions.ORIGINFILECHOOSER:
+	    	   if (actions.capture(Actions.ORIGINFILECHOOSER)[0].equals("0")) { 
+	    		   actions.show(Actions.ORIGINFILECHOOSER, actions.capture(Actions.PATH)); 
+	    		   actions.message(""); 
 	    	   }  
-	       break; 
+	    	break; 
 	    }  
 	} 
    public void mouseExited(MouseEvent e) { 
-	   acciones.mensaje(""); 
+	   actions.message(""); 
    }
    
    public void mouseClicked(MouseEvent e) {}
@@ -46,10 +46,11 @@ import View.Actions;
    public void mouseReleased(MouseEvent e) {}
    
    public void progressbar() {
-	   acciones.mostrar("progressbar", gestion.obtenerProgreso());
-	   if (!gestion.getStatus()) {
-		   acciones.mensaje("La operacion ha finalizado exitozamente");
-		   acciones.activar("progressbar");
+	   actions.show(Actions.PROGRESSBAR, management.getProgress());
+	   if (!management.getStatus()) {
+		   actions.show(Actions.PROGRESSBAR, management.getProgress());
+		   actions.message("La operacion finalizo exitosamente en "+management.getTime());
+		   actions.activate(Actions.PROGRESSBAR);
 	   } 
    }
  }
