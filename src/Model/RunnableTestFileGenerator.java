@@ -7,7 +7,6 @@ public class RunnableTestFileGenerator implements Runnable{
 	
 	private Management management;
 	
-	private int totalFilesGenerated;
 	private int limit;
 
 	private int year;
@@ -21,9 +20,6 @@ public class RunnableTestFileGenerator implements Runnable{
 	
 	private SimpleDateFormat sdfDate;
 	
-	private Long start;
-	private Long end;
-	
 	public RunnableTestFileGenerator(Management management) {
 		this.management = management;
 	}
@@ -32,11 +28,7 @@ public class RunnableTestFileGenerator implements Runnable{
 	public void run() {
 		try {
 			Thread.sleep(700);
-			start = System.currentTimeMillis();
-			totalFilesGenerated = 0;
 			generateFiles();
-			end = System.currentTimeMillis();
-			management.addTime(end-start);
 		} catch (Exception e) {}
 	}
 	
@@ -49,7 +41,7 @@ public class RunnableTestFileGenerator implements Runnable{
 		
 		File newFile;
 		Date newDate;
-		while(directory.listFiles().length<limit) {
+		for(int i=0; i<limit; i++) {
 			year = ((int)(Math.random()*(52+1)+70));//(M+1-m)+m
 			//el año 0= 1900 pero no se pueden sobree escribir fecha de modificacion antes de 1970 tons +70 y +52 para la fecha actual
 			month = ((int)(Math.random()*(11+1)));//(M+1-m)+m
@@ -58,13 +50,15 @@ public class RunnableTestFileGenerator implements Runnable{
 			
 			try {
 				newDate = new Date(year, month, day);
-				System.out.println(directory.getPath()+"/"+sdfDate.format(newDate)+extention[extentionIndex]);
+//				System.out.println(directory.getPath()+"/"+sdfDate.format(newDate)+extention[extentionIndex]);
 				newFile = new File(directory.getPath()+"/"+sdfDate.format(newDate)+extention[extentionIndex]);
 				if (!newFile.exists()) {
 					newFile.createNewFile();
 					newFile.setLastModified(newDate.getTime());
-					totalFilesGenerated++;
+					management.processedFilesAdd(1);
 //					Thread.sleep(250);
+//		        }else {
+//		        	i--;
 		        }
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -73,31 +67,12 @@ public class RunnableTestFileGenerator implements Runnable{
 		}
 	}
 	
-	public String[] getProgress() {
-		String[] datos = {
-				""+totalFilesGenerated, ""+limit
-	    };
-		return datos;
-	}
-	
-	public int getTotalFilesGenerated() {
-		return totalFilesGenerated;
-	}
-
-	public void setTotalFilesGenerated(int totalFilesGenerated) {
-		this.totalFilesGenerated = totalFilesGenerated;
-	}
-
-	public int getLimit() {
-		return limit;
-	}
-
 	public void setLimit(int limit) {
 		this.limit = limit;
 	}
 
-	public void setDirectory(String path) {
-		this.directory = new File(path+"/Test Files");
+	public void setDirectory(File directory) {
+		this.directory = directory;
 	}
 
 	
