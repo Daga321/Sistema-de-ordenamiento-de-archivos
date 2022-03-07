@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class RunnableTestFileGenerator implements Runnable{
 	
+	private Management management;
+	
 	private int totalFilesGenerated;
 	private int limit;
 
@@ -19,10 +21,23 @@ public class RunnableTestFileGenerator implements Runnable{
 	
 	private SimpleDateFormat sdfDate;
 	
+	private Long start;
+	private Long end;
+	
+	public RunnableTestFileGenerator(Management management) {
+		this.management = management;
+	}
+	
 	@Override
 	public void run() {
-		totalFilesGenerated = 0;
-		generateFiles();
+		try {
+			Thread.sleep(700);
+			start = System.currentTimeMillis();
+			totalFilesGenerated = 0;
+			generateFiles();
+			end = System.currentTimeMillis();
+			management.addTime(end-start);
+		} catch (Exception e) {}
 	}
 	
 	public void generateFiles() {

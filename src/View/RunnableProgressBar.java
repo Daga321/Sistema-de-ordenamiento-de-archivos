@@ -3,21 +3,21 @@ package View;
 import Control.Controller;
 
 public class RunnableProgressBar implements Runnable{
-  private Controller control;
-  private boolean estado;
+  private Controller controller;
+  private boolean status;
   
-  public void asignarControl(Controller control) {
-	this.control = control;
+  public void asignarControl(Controller controller) {
+	this.controller = controller;
   }
 
   
   public void run() {
-	estado = true;
+	status = true;
     try {
       while (true) {
     	  Thread.sleep(200);
-    	  while (estado) {
-			  control.progressbar();
+    	  while (status) {
+			  controller.progressbar();
 //			  Thread.sleep(200);
     	  } 
       } 
@@ -26,11 +26,11 @@ public class RunnableProgressBar implements Runnable{
     } 
   } 
   
-  public void iniciar() {
-	  estado = true;
+  public void activate() {
+	  status = true;
   }
   
-  public void finalizar() {
-	  estado = false;
+  public void desactivate() {
+	  status = false;
   }
 }
