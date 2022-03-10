@@ -20,7 +20,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 	private ImageIcon icon;
   
 	public PrincipalWindow() {
-		super("sistema de ordenamiento de archivos - Un hilo");
+		super("sistema de ordenamiento de archivos - Varios hilos");
 		setLayout(null);
 		setDefaultCloseOperation(3);
 		setSize(570, 410);
@@ -60,12 +60,23 @@ public class PrincipalWindow extends JFrame implements Actions{
   public void activate(String section) {
 	  if (section.equals(Actions.CHECKBOXOPTIONS)) {
 		  panel.activateOptions();
-		  panel.setSize(570, panel.getHeight()+90);
-		  setSize(this.getWidth(), this.getHeight()+90);
+		  if (panel.getCbOpciones()[1].equals("true")) {
+			  panel.setSize(570, 833);
+			  setSize(this.getWidth(), 833);
+		  }else {
+			  panel.setSize(570, 500);
+			  setSize(570, 500); 
+		  }
+		  
 	  } else if (section.equals(Actions.CHECKBOXADVANCEDOPTIONS)) {
 		  panel.activateAdvancedOptions();
-		  panel.setSize(570, panel.getHeight()+333);
-		  setSize(570, this.getHeight()+333);
+		  if (panel.getCbOpciones()[0].equals("false")) {
+			  panel.setSize(570, 833);
+			  setSize(this.getWidth(), 833);
+		  }else {
+			  panel.setSize(570, 743);
+			  setSize(570, 743);  
+		  }
 	  } else if (section.equals(Actions.CHECKBOXCUSTOMIZEDDIRECTORY)) {
 		  panel.activateCustomizedDirectory();
 	  } else if (section.equals(Actions.CHECKBOXFILTER)) {
@@ -81,12 +92,22 @@ public class PrincipalWindow extends JFrame implements Actions{
   public void desactivate(String section) {
 	  if (section.equals(Actions.CHECKBOXOPTIONS)) {
 		  panel.desactivateOptions();
-		  panel.setSize(570, panel.getHeight()-90);
-		  setSize(570, this.getHeight()-90);
+		  if (panel.getCbOpciones()[1].equals("true")) {
+			  panel.setSize(570, 743);
+			  setSize(570, 743);
+		  }else {
+			  panel.setSize(570, 410);
+			  setSize(570, 410);
+		  }
 	  } else if (section.equals(Actions.CHECKBOXADVANCEDOPTIONS)) {
 		  panel.desactivateAdvancedOptions();
-		  panel.setSize(570, panel.getHeight()-333);
-		  setSize(570, this.getHeight()-333);
+		  if (panel.getCbOpciones()[0].equals("false")) {
+			  panel.setSize(570, 500);
+			  setSize(570, 500);
+		  }else {
+			  panel.setSize(570, 410);
+			  setSize(570, 410);
+		  }
 	  } else if (section.equals(Actions.CHECKBOXCUSTOMIZEDDIRECTORY)) {
 		  panel.desactivateCustomizedDirectory();
 	  } else if (section.equals(Actions.CHECKBOXFILTER)) {
