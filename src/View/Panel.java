@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
 
@@ -22,6 +22,8 @@ import Control.Controller;
 
 public class Panel extends JPanel{
 
+	private URL url;
+	private JLabel lblSignature;
 	private JLabel txtPathInformation;
 	private RoundJTextField tfPath;
 	private JButton btnSearchPath;
@@ -40,12 +42,21 @@ public class Panel extends JPanel{
 	}
 	
 	private void initialize() {
+		lblSignature = new JLabel();
+		lblSignature.setBounds(8, 0, 59, 260);
+		url = Panel.class.getResource("/signature.png");
+		ImageIcon imgIcon = new ImageIcon(url);
+	    Image imgEscalada = imgIcon.getImage().getScaledInstance(lblSignature.getWidth(),lblSignature.getHeight(), Image.SCALE_SMOOTH);
+	    Icon iconoEscalado = new ImageIcon(imgEscalada);
+        lblSignature.setIcon(iconoEscalado);
+        
 		txtPathInformation = new JLabel("<html><body>Por favor selecciona la ubicacion donde desea generar los archivos de prueba</body></html>");
 		txtPathInformation.setBounds(80, 20, 424, 30);
 		
 		tfPath = new RoundJTextField(20);
 		tfPath.setBounds(80, 60, 380, 25);
-		ImageIcon imgIcontxt = new ImageIcon("Imagenes/comp.png");
+		url = Panel.class.getResource("/comp.png");
+		ImageIcon imgIcontxt = new ImageIcon(url);
 	    Image imgEscaladatxt = imgIcontxt.getImage().getScaledInstance(tfPath.getWidth(),tfPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladotxt = new ImageIcon(imgEscaladatxt);
 	    tfPath.setIcon(iconoEscaladotxt);
@@ -59,7 +70,8 @@ public class Panel extends JPanel{
 		btnSearchPath.setBounds(470, 60, 25, 25);
 		btnSearchPath.setContentAreaFilled(false);
 		btnSearchPath.setBorder(new RoundedBorder(20));
-		ImageIcon imgIconBoton = new ImageIcon("Imagenes/fileCabinet.png");
+		url = Panel.class.getResource("/fileCabinet.png");
+		ImageIcon imgIconBoton = new ImageIcon(url);
 	    Image imgEscaladaBoton = imgIconBoton.getImage().getScaledInstance(btnSearchPath.getWidth(),btnSearchPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladoBoton = new ImageIcon(imgEscaladaBoton);
 	    btnSearchPath.setIcon(iconoEscaladoBoton);
@@ -89,6 +101,8 @@ public class Panel extends JPanel{
 
 	
 	private void assign() {
+
+		add(lblSignature);
 		add(txtPathInformation);
 		add(tfPath);
 		add(btnSearchPath);
