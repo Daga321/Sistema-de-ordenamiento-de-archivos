@@ -20,7 +20,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 	private ImageIcon icon;
   
 	public PrincipalWindow() {
-		super("sistema de ordenamiento de archivos - Varios hilos");
+		super("sistema de ordenamiento de archivos - Un hilos");
 		setLayout(null);
 		setDefaultCloseOperation(3);
 		setSize(570, 410);
