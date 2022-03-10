@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import Control.Controller;
 
 
 public class Panel extends JPanel{
+	private URL url;
 	private JLabel lblSignature;
 	private JLabel lblOriginInformatio;
 	private RoundJTextField txtfOriginPath;
@@ -41,7 +44,8 @@ public class Panel extends JPanel{
 	private void initialize() {
 		lblSignature = new JLabel();
 		lblSignature.setBounds(8, 0, 59, 350);
-		ImageIcon imgIcon = new ImageIcon("Imagenes/signature.png");
+		url = Panel.class.getResource("/signature.png");
+		ImageIcon imgIcon = new ImageIcon(url);
 	    Image imgEscalada = imgIcon.getImage().getScaledInstance(lblSignature.getWidth(),lblSignature.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscalado = new ImageIcon(imgEscalada);
         lblSignature.setIcon(iconoEscalado);
@@ -51,7 +55,8 @@ public class Panel extends JPanel{
 		
 		txtfOriginPath = new RoundJTextField(20);
 		txtfOriginPath.setBounds(92, 79, 398, 32);
-		ImageIcon imgIcontxt = new ImageIcon("Imagenes/comp.png");
+		url = Panel.class.getResource("/comp.png");
+		ImageIcon imgIcontxt = new ImageIcon(url);
 	    Image imgEscaladatxt = imgIcontxt.getImage().getScaledInstance(txtfOriginPath.getWidth(),txtfOriginPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladotxt = new ImageIcon(imgEscaladatxt);
 	    txtfOriginPath.setIcon(iconoEscaladotxt);
@@ -65,7 +70,8 @@ public class Panel extends JPanel{
 		btnSearchOriginPath.setBounds(500, 79, 32, 32);
 		btnSearchOriginPath.setContentAreaFilled(false);
 		btnSearchOriginPath.setBorder(new RoundedBorder(20));
-		ImageIcon imgIconBoton = new ImageIcon("Imagenes/fileCabinet.png");
+		url = Panel.class.getResource("/fileCabinet.png");
+		ImageIcon imgIconBoton = new ImageIcon(url);
 	    Image imgEscaladaBoton = imgIconBoton.getImage().getScaledInstance(btnSearchOriginPath.getWidth(),btnSearchOriginPath.getHeight(), Image.SCALE_SMOOTH);
 	    Icon iconoEscaladoBoton = new ImageIcon(imgEscaladaBoton);
 	    btnSearchOriginPath.setIcon(iconoEscaladoBoton);
