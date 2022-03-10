@@ -44,6 +44,7 @@ public class PrincipalWindow extends JFrame implements Actions{
 		  icon = new ImageIcon(url);
 		  setIconImage(icon.getImage());
 	  } catch (Exception exception) {}
+	  
   }
   
   private void assign() {
