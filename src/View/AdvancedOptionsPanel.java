@@ -34,13 +34,13 @@ public class AdvancedOptionsPanel extends JPanel {
 	  txtDirectoryOption = new JLabel("<html><body>Selecciona una opcion de guardado</body></html>");
 	  txtDirectoryOption.setBounds(8, 6, 228, 20);
     
-	  cbDirectoryOption1 = new JCheckBox("<html><body>Ordenar por carpetas año/mes</body></html>");
+	  cbDirectoryOption1 = new JCheckBox("<html><body>Ordenar por carpetas aÃ±o/mes</body></html>");
 	  cbDirectoryOption1.setBounds(8, 46, 124, 60);
 	  cbDirectoryOption1.setBackground(Color.WHITE);
 	  cbDirectoryOption1.setSelected(true);
 	  cbDirectoryOption1.setCursor(new Cursor(Cursor.HAND_CURSOR));
     
-	  cbDirectoryOption2 = new JCheckBox("<html><body>Ordenar por carpetas año</body></html>");
+	  cbDirectoryOption2 = new JCheckBox("<html><body>Ordenar por carpetas aÃ±o</body></html>");
 	  cbDirectoryOption2.setBackground(Color.WHITE);
 	  cbDirectoryOption2.setBounds(153, 46, 124, 60);
 	  cbDirectoryOption2.setCursor(new Cursor(Cursor.HAND_CURSOR));
