@@ -50,7 +50,7 @@ public class Panel extends JPanel{
 	    Icon iconoEscalado = new ImageIcon(imgEscalada);
         lblSignature.setIcon(iconoEscalado);
 		
-		lblOriginInformatio = new JLabel("<html><body>Por favor seleccione la ubicación de los archivos que desea organizar</body></html>");
+		lblOriginInformatio = new JLabel("<html><body>Por favor seleccione la ubicacion de los archivos que desea organizar</body></html>");
 		lblOriginInformatio.setBounds(92, 39, 440, 20);
 		
 		txtfOriginPath = new RoundJTextField(20);
@@ -77,7 +77,7 @@ public class Panel extends JPanel{
 	    btnSearchOriginPath.setIcon(iconoEscaladoBoton);
 	    btnSearchOriginPath.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    
-		cbOpcions = new JCheckBox("<html><body>Utilizar ubicación de origen como ubicación de destino</body></html>", true);
+		cbOpcions = new JCheckBox("<html><body>Utilizar ubicacion de origen como ubicacion de destino</body></html>", true);
 		cbOpcions.setBounds(92, 131, 362, 20);
 		cbOpcions.setBackground(Color.WHITE);
 		cbOpcions.setCursor(new Cursor(Cursor.HAND_CURSOR));
